@@ -1,4 +1,6 @@
 from django.db import models
+from django.urls import reverse
+from django.utils import timezone
 
 # Create your models here.
 
@@ -7,8 +9,9 @@ class Thing(models.Model):
     description = models.CharField(max_length=400)
     location = models.CharField(max_length=100)
     owner = models.CharField(max_length=100)
-    slug = models.SlugField(null=True, blank=False)
     favorite = models.BooleanField(default=False)
+    slug =models.SlugField(unique=True, null=True, blank=False)
+    
 
 class Container(models.Model):
     name = models.CharField(max_length=100)
