@@ -28,10 +28,10 @@ router.register(r'users', UserViews)
 router.register(r'groups', GroupViews)
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('admin/', admin.site.urls),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('api/user/register/', UserCreate.as_view(), name='create_user'),
     path('api/user/logout/blacklist/', BlacklistTokenView.as_view(), name='blacklist'),
     path('', include(router.urls)),

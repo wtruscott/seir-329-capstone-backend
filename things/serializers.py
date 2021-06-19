@@ -5,7 +5,7 @@ from django.contrib.auth.models import User, Group
 class ThingSerializer(ModelSerializer):
     class Meta:
         model = Thing
-        fields = ["id", "name", "description", "location", "owner", "favorite"]
+        fields = ["id", "name", "description", "location", "owner", "slug", "favorite"]
 
 class CollectionSerializer(ModelSerializer):
     class Meta:

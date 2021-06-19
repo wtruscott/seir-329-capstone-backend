@@ -7,6 +7,7 @@ class Thing(models.Model):
     description = models.CharField(max_length=400)
     location = models.CharField(max_length=100)
     owner = models.CharField(max_length=100)
+    slug = models.SlugField(null=True, blank=False)
     favorite = models.BooleanField(default=False)
 
 class Container(models.Model):

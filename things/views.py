@@ -28,7 +28,7 @@ class ThingViews(ModelViewSet):
 
     def get_object(self, queryset=None, **kwargs):
         item = self.kwargs.get('pk')
-        return get_object_or_404(Thing, name=item)
+        return get_object_or_404(Thing, slug=item)
 
     def get_queryset(self):
             return Thing.objects.all()
