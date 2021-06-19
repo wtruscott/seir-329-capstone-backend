@@ -30,7 +30,7 @@ urlpatterns = [
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/user/register/', UserCreate.as_view(), name='create_user'),
-    path('api/user/logout/blacklist/', BlacklistTokenView.as_viw(), name='blacklist'),
+    path('api/user/logout/blacklist/', BlacklistTokenView.as_view(), name='blacklist'),
     path('', include(router.urls)),
     # path('thing/create/', CreateThing.as_view(), name='creatething'),
     # path('thing/edit/thingdetail/<int:pk>/', EditThingDetail.as_view(), name='thingdetail'),
