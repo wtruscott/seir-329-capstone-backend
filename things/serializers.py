@@ -1,16 +1,26 @@
-from things.models import Thing, Collection
+from things.models import Thing, Collection, Place, Container
 from rest_framework.serializers import ModelSerializer, HyperlinkedModelSerializer
 from django.contrib.auth.models import User, Group
 
 class ThingSerializer(ModelSerializer):
     class Meta:
         model = Thing
-        fields = ["id", "name", "description", "location", "favorite"]
+        fields = ["id", "name", "description", "location", "owner", "favorite"]
 
 class CollectionSerializer(ModelSerializer):
     class Meta:
         model = Collection
         fields = ["id", "name", "things"]
+
+class ContainerSerializer(ModelSerializer):
+    class Meta:
+        model = Container
+        fields = ["id", "name", "things"]
+
+class PlaceSerializer(ModelSerializer):
+    class Meta:
+        model = Place
+        fields = ["id", "name", "things", "containers"]
 
 class UserSerializer(HyperlinkedModelSerializer):
     class Meta:

@@ -1,27 +1,55 @@
-from django.shortcuts import render
-from things.models import Thing, Collection
+from django.shortcuts import render, get_object_or_404
+from things.models import Thing, Collection, Container, Place
 from django.contrib.auth.models import User, Group
-from things.serializers import RegisterUserSerializer, ThingSerializer, CollectionSerializer, UserSerializer, GroupSerializer
-from rest_framework.viewsets import ModelViewSet, ModelViewSet
+from things.serializers import RegisterUserSerializer, ThingSerializer, CollectionSerializer, UserSerializer, GroupSerializer, ContainerSerializer, PlaceSerializer
+from rest_framework.viewsets import ModelViewSet, ModelViewSet, ViewSet
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status, viewsets, filters, generics, permissions
-from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.permissions import SAFE_METHODS, BasePermission, IsAuthenticated, AllowAny, DjangoModelPermissions
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework_simplejwt.tokens import RefreshToken
 
 # Create your views here.
+
+class ThingEditPermission(BasePermission):
+    messege = 'Only the owner may edit this thing.'
+
+    def has_object_permission(self, request, view, obj):
+
+        if request.method in SAFE_METHODS:
+            return True
+
+        return obj.owner == request.user
+
 class ThingViews(ModelViewSet):
-    queryset = Thing.objects.all()
+    permission_classes = [AllowAny]
     serializer_class = ThingSerializer
-    permission_classes = [IsAuthenticated]
-    authentication_classes = (JWTAuthentication,)
+
+    def get_object(self, queryset=None, **kwargs):
+        item = self.kwargs.get('pk')
+        return get_object_or_404(Thing, name=item)
+
+    def get_queryset(self):
+            return Thing.objects.all()
 
 class CollectionViews(ModelViewSet):
     queryset = Collection.objects.all()
     serializer_class = CollectionSerializer
-    permission_classes = [IsAuthenticated]
-    authentication_classes = (JWTAuthentication,)
+    permission_classes = [AllowAny]
+    # authentication_classes = (JWTAuthentication,)
+
+class ContainerViews(ModelViewSet):
+    queryset = Container.objects.all()
+    serializer_class = ContainerSerializer
+    permission_classes = [AllowAny]
+    # authentication_classes = (JWTAuthentication,)
+
+class PlaceViews(ModelViewSet):
+    queryset = Place.objects.all()
+    serializer_class = PlaceSerializer
+    permission_classes = [AllowAny]
+    # authentication_classes = (JWTAuthentication,)
 
 class UserViews(ModelViewSet):
     queryset = User.objects.all()
