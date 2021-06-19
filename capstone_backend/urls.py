@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from things.views import CreateThing, EditThingDetail, ThingViews, BlacklistTokenView, EditThing, DeleteThing, CollectionViews, UserViews, GroupViews, UserCreate
+from things.views import ThingViews, BlacklistTokenView, CollectionViews, UserViews, GroupViews, UserCreate
 from rest_framework_simplejwt.views import ( TokenObtainPairView, TokenRefreshView)
 
 router = DefaultRouter()
