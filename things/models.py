@@ -1,6 +1,5 @@
 from django.db import models
-from django.urls import reverse
-from django.utils import timezone
+from django.utils.text import slugify
 
 # Create your models here.
 
@@ -10,7 +9,11 @@ class Thing(models.Model):
     location = models.CharField(max_length=100)
     owner = models.CharField(max_length=100)
     favorite = models.BooleanField(default=False)
-    slug =models.SlugField(unique=True, null=True, blank=False)
+    slug =models.SlugField(unique=True)
+
+    def save(self, *args, **kwargs):
+        self.slug = self.slug or slugify(self.name)
+        super().save(*args, **kwargs)
     
 
 class Container(models.Model):
