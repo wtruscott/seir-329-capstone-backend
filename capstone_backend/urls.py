@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from things.views import ThingViews, BlacklistTokenView, CollectionViews, ContainerViews, PlaceViews, UserViews, GroupViews, UserCreate, ThingListDetailFilter
+from things.views import ThingViews, BlacklistTokenView, CollectionViews, ContainerViews, PlaceViews, UserViews, GroupViews, UserCreate, ThingListDetailFilter, CreateThing, EditThing, DeleteThing, EditThingDetail
 from rest_framework_simplejwt.views import ( TokenObtainPairView, TokenRefreshView)
 
 router = DefaultRouter()
@@ -36,8 +36,8 @@ urlpatterns = [
     path('api/search/', ThingListDetailFilter.as_view(), name='thingsearch'),
     path('api/user/logout/blacklist/', BlacklistTokenView.as_view(), name='blacklist'),
     path('', include(router.urls)),
-    # path('thing/create/', CreateThing.as_view(), name='creatething'),
-    # path('thing/edit/thingdetail/<int:pk>/', EditThingDetail.as_view(), name='thingdetail'),
-    # path('thing/edit/<int:pk>/', EditThing.as_view(), name='editthing'),
-    # path('thing/delete/<int:pk>/', DeleteThing.as_view(), name='deletething')
+    path('admin/create/', CreateThing.as_view(), name='creatething'),
+    path('admin/edit/thingdetail/<int:pk>/', EditThingDetail.as_view(), name='thingdetail'),
+    path('admin/edit/<int:pk>/', EditThing.as_view(), name='editthing'),
+    path('admin/delete/<int:pk>/', DeleteThing.as_view(), name='deletething')
 ]
