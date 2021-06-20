@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from things.views import ThingViews, BlacklistTokenView, CollectionViews, ContainerViews, PlaceViews, UserViews, GroupViews, UserCreate
+from things.views import ThingViews, BlacklistTokenView, CollectionViews, ContainerViews, PlaceViews, UserViews, GroupViews, UserCreate, ThingListDetailFilter
 from rest_framework_simplejwt.views import ( TokenObtainPairView, TokenRefreshView)
 
 router = DefaultRouter()
@@ -33,6 +33,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('api/user/register/', UserCreate.as_view(), name='create_user'),
+    path('api/search/', ThingListDetailFilter.as_view(), name='thingsearch'),
     path('api/user/logout/blacklist/', BlacklistTokenView.as_view(), name='blacklist'),
     path('', include(router.urls)),
     # path('thing/create/', CreateThing.as_view(), name='creatething'),

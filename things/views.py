@@ -23,7 +23,7 @@ class ThingEditPermission(BasePermission):
         return obj.owner == request.user
 
 class ThingViews(ModelViewSet):
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
     serializer_class = ThingSerializer
 
     def get_object(self, queryset=None, **kwargs):
@@ -33,23 +33,33 @@ class ThingViews(ModelViewSet):
     def get_queryset(self):
             return Thing.objects.all()
 
+class ThingListDetailFilter(generics.ListAPIView):
+
+    queryset = Thing.objects.all()
+    serializer_class = ThingSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['^slug']
+
+class ThingSearch(generics.ListAPIView):
+    permission_classes = [IsAuthenticated]
+    queryset =Thing.objects.all()
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['^slug']
+
 class CollectionViews(ModelViewSet):
     queryset = Collection.objects.all()
     serializer_class = CollectionSerializer
-    permission_classes = [AllowAny]
-    # authentication_classes = (JWTAuthentication,)
+    permission_classes = [IsAuthenticated]
 
 class ContainerViews(ModelViewSet):
     queryset = Container.objects.all()
     serializer_class = ContainerSerializer
-    permission_classes = [AllowAny]
-    # authentication_classes = (JWTAuthentication,)
+    permission_classes = [IsAuthenticated]
 
 class PlaceViews(ModelViewSet):
     queryset = Place.objects.all()
     serializer_class = PlaceSerializer
-    permission_classes = [AllowAny]
-    # authentication_classes = (JWTAuthentication,)
+    permission_classes = [IsAuthenticated]
 
 class UserViews(ModelViewSet):
     queryset = User.objects.all()
@@ -67,7 +77,7 @@ class UserCreate(APIView):
         return Response(reg_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class BlacklistTokenView(APIView):
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
 
     def post(self, request):
         try:
@@ -82,7 +92,6 @@ class GroupViews(ModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
     permission_classes = [IsAuthenticated]
-    authentication_classes = (JWTAuthentication,)
 
 #CRUD Functions
 
