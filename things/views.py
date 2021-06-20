@@ -23,7 +23,7 @@ class ThingEditPermission(BasePermission):
         return obj.owner == request.user
 
 class ThingViews(ModelViewSet):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
     serializer_class = ThingSerializer
 
     def get_object(self, queryset=None, **kwargs):
@@ -41,7 +41,7 @@ class ThingListDetailFilter(generics.ListAPIView):
     search_fields = ['^slug']
 
 class ThingSearch(generics.ListAPIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
     queryset =Thing.objects.all()
     filter_backends = [filters.SearchFilter]
     search_fields = ['^slug']
@@ -49,17 +49,17 @@ class ThingSearch(generics.ListAPIView):
 class CollectionViews(ModelViewSet):
     queryset = Collection.objects.all()
     serializer_class = CollectionSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
 
 class ContainerViews(ModelViewSet):
     queryset = Container.objects.all()
     serializer_class = ContainerSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
 
 class PlaceViews(ModelViewSet):
     queryset = Place.objects.all()
     serializer_class = PlaceSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
 
 class UserViews(ModelViewSet):
     queryset = User.objects.all()
