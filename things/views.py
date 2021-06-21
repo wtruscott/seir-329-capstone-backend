@@ -63,10 +63,24 @@ class ContainerViews(ModelViewSet):
     serializer_class = ContainerSerializer
     permission_classes = [AllowAny]
 
+    def get_object(self, queryset=None, **kwargs):
+        item = self.kwargs.get('pk')
+        return get_object_or_404(Container, slug=item)
+
+    def get_queryset(self):
+            return Container.objects.all()
+
 class PlaceViews(ModelViewSet):
     queryset = Place.objects.all()
     serializer_class = PlaceSerializer
     permission_classes = [AllowAny]
+
+    def get_object(self, queryset=None, **kwargs):
+        item = self.kwargs.get('pk')
+        return get_object_or_404(Place, slug=item)
+
+    def get_queryset(self):
+            return Place.objects.all()
 
 class UserViews(ModelViewSet):
     queryset = User.objects.all()
