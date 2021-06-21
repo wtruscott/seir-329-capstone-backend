@@ -36,8 +36,8 @@ urlpatterns = [
     path('api/search/', ThingListDetailFilter.as_view(), name='thingsearch'),
     path('api/user/logout/blacklist/', BlacklistTokenView.as_view(), name='blacklist'),
     path('', include(router.urls)),
-    path('admin/create/', CreateThing.as_view(), name='creatething'),
-    path('admin/edit/thingdetail/<int:pk>/', EditThingDetail.as_view(), name='thingdetail'),
-    path('admin/edit/<int:pk>/', EditThing.as_view(), name='editthing'),
-    path('admin/delete/<int:pk>/', DeleteThing.as_view(), name='deletething')
+    path('api/admin/create/', CreateThing.as_view(), name='creatething'),
+    path('api/admin/edit/thingdetail/<int:pk>/', EditThingDetail.as_view(), name='thingdetail'),
+    path('api/admin/edit/<int:pk>/', EditThing.as_view(), name='editthing'),
+    path('api/admin/delete/<int:pk>/', DeleteThing.as_view(), name='deletething')
 ]
