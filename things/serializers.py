@@ -10,17 +10,17 @@ class ThingSerializer(ModelSerializer):
 class CollectionSerializer(ModelSerializer):
     class Meta:
         model = Collection
-        fields = ["id", "name", "things"]
+        fields = ["id", "name", "things", "slug"]
 
 class ContainerSerializer(ModelSerializer):
     class Meta:
         model = Container
-        fields = ["id", "name", "things"]
+        fields = ["id", "name", "things", "slug"]
 
 class PlaceSerializer(ModelSerializer):
     class Meta:
         model = Place
-        fields = ["id", "name", "things", "containers"]
+        fields = ["id", "name", "things", "containers", "slug"]
 
 class UserSerializer(HyperlinkedModelSerializer):
     class Meta:
