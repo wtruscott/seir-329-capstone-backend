@@ -96,21 +96,21 @@ class GroupViews(ModelViewSet):
 #CRUD Functions
 
 class CreateThing(generics.CreateAPIView):
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [AllowAny]
     queryset = Thing.objects.all()
     serializer_class = ThingSerializer
 
 class EditThingDetail(generics.RetrieveAPIView):
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [AllowAny]
     queryset = Thing.objects.all()
     serializer_class = ThingSerializer
 
 class EditThing(generics.UpdateAPIView):
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [AllowAny]
     queryset = Thing.objects.all()
     serializer_class = ThingSerializer
 
 class DeleteThing(generics.RetrieveDestroyAPIView):
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [AllowAny]
     queryset = Thing.objects.all()
     serializer_class = ThingSerializer
