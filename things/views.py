@@ -51,6 +51,13 @@ class CollectionViews(ModelViewSet):
     serializer_class = CollectionSerializer
     permission_classes = [AllowAny]
 
+    def get_object(self, queryset=None, **kwargs):
+        item = self.kwargs.get('pk')
+        return get_object_or_404(Collection, slug=item)
+
+    def get_queryset(self):
+            return Collection.objects.all()
+
 class ContainerViews(ModelViewSet):
     queryset = Container.objects.all()
     serializer_class = ContainerSerializer
