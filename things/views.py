@@ -12,16 +12,6 @@ from rest_framework_simplejwt.tokens import RefreshToken
 
 # Create your views here.
 
-class ThingEditPermission(BasePermission):
-    messege = 'Only the owner may edit this thing.'
-
-    def has_object_permission(self, request, view, obj):
-
-        if request.method in SAFE_METHODS:
-            return True
-
-        return obj.owner == request.user
-
 class ThingViews(ModelViewSet):
     permission_classes = [AllowAny]
     serializer_class = ThingSerializer
@@ -114,7 +104,7 @@ class GroupViews(ModelViewSet):
     serializer_class = GroupSerializer
     permission_classes = [IsAuthenticated]
 
-#CRUD Functions
+#CRUD Functions I don't think  ended up implementing these, but I'm not deleting them right now.
 
 class CreateThing(generics.CreateAPIView):
     permission_classes = [AllowAny]
